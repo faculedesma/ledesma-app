@@ -1,3 +1,5 @@
+[![Deployment Pipeline](https://github.com/faculedesma/ledesma-app/actions/workflows/pipeline.yml/badge.svg)](https://github.com/faculedesma/ledesma-app/actions/workflows/pipeline.yml)
+
 # ReactJS & Typescript
 
 ## About The Project
