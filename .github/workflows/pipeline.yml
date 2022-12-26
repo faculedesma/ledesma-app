@@ -18,8 +18,13 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16.x'
+      - name: npmrc
+        run: cat .npmrc
       - name: Install dependencies
         run: npm install --no-audit --no-fund --no-optional
+        env:
+          CI: true
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       - name: Lint
         run: npm run lint
       - name: Build
