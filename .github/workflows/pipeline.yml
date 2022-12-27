@@ -15,8 +15,12 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
-        run: npm ci --no-audit --no-fund --no-optional
+        run: |
+          npm ci
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Lint
         run: npm run lint
       - name: Build
