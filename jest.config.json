@@ -1,0 +1,11 @@
+{
+  "preset": "ts-jest",
+  "testEnvironment": "jest-environment-jsdom",
+  "testPathIgnorePatterns": ["<rootDir>/dist"],
+  "moduleNameMapper": {
+    "@components/(.*)": "<rootDir>/src/components/$1",
+    "@assets/(.*)": "<rootDir>/src/assets/$1",
+    "@utils/(.*)": "<rootDir>/src/utils/$1",
+    "\\.(scss)$": "identity-obj-proxy"
+  }
+}

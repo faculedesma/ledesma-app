@@ -24,3 +24,5 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       - name: Lint
         run: npm run lint
+      - name: Unit test
+        run: npm test
