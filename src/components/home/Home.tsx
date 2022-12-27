@@ -1,115 +1,110 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Button,
   Table,
   TableRow,
   TableHeaderCell,
-  TableCell,
-} from "@faculedesma/ledesma-lib";
-import { useQuery } from "react-query";
-import PokemonCard from "@components/card/Card";
-import { capitalizeFirstLetter } from "src/utils/utils";
-import "./home.scss";
+  TableCell
+} from '@faculedesma/ledesma-lib';
+import PokemonCard from '@components/card/Card';
+import { usePokemons } from '@components/hooks/usePokemons';
+import { capitalizeFirstLetter } from '@utils/utils';
+import './home.scss';
 
-const getPokemonIdFromURL = (url) => {
-  const parts = url.split("/");
+const getPokemonIdFromURL = (url: string): string => {
+  const parts = url.split('/');
   return parts[parts.length - 2];
 };
 
-const Home = () => {
+const Home = (): JSX.Element => {
   const [offset, setOffset] = useState<number>(0);
   const [selectedPokemonId, setSelectedPokemonId] = useState<
     string | undefined
   >(undefined);
 
-  const getPokemons = async ({ queryKey }) => {
-    const response = await fetch(
-      `https://pokeapi.co/api/v2/pokemon?limit=10&offset=${queryKey[1]}`
-    );
-    return response.json();
-  };
-
-  const { data, isError, isLoading } = useQuery(
-    ["pokemons", offset],
-    getPokemons
-  );
-
-  const handlePrev = () => setOffset(offset - 10);
-  const handleNext = () => setOffset(offset + 10);
+  const { data, isLoading, isError } = usePokemons(offset);
 
   if (isLoading) {
-    return <>Loading...</>;
+    return <div>Loading...</div>;
   }
 
   if (isError) {
-    return <>Error!</>;
+    return <div>Error!</div>;
   }
 
-  const columns = Object.keys(data.results[0]).map((column) =>
-    capitalizeFirstLetter(column)
-  );
-  const rows = data.results.map((row) => [
-    capitalizeFirstLetter(row.name),
-    row.url,
-  ]);
+  const handleSelectRow = (id: string): void => setSelectedPokemonId(id);
 
-  const handleSelectRow = (id: string) => {
-    setSelectedPokemonId(id);
-  };
+  const handlePrev = (): void => setOffset(offset - 10);
 
-  console.log("me renderizo again");
+  const handleNext = (): void => setOffset(offset + 10);
 
-  return (
-    <div className="home">
-      <Table>
-        <>
-          <thead>
-            <TableRow>
-              <>
-                {columns.map((name, columnIndex) => {
-                  return (
-                    <TableHeaderCell key={columnIndex}>{name}</TableHeaderCell>
-                  );
-                })}
-              </>
-            </TableRow>
-          </thead>
-          <tbody>
-            {rows.map((row, rowIndex) => {
-              return (
-                <TableRow
-                  key={rowIndex}
-                  onClick={() => handleSelectRow(getPokemonIdFromURL(row[1]))}
-                >
-                  <>
-                    {row.map((data, rowDataIndex) => {
-                      return <TableCell key={rowDataIndex}>{data}</TableCell>;
-                    })}
-                  </>
-                </TableRow>
-              );
-            })}
-          </tbody>
-        </>
-      </Table>
-      <div>
-        <Button onClick={handlePrev} disabled={offset === 0}>
-          Previous
-        </Button>
-        <Button
-          onClick={handleNext}
-          disabled={offset === Math.trunc(data.count / 10) + 1}
-        >
-          Next
-        </Button>
-        <span>Page: {offset / 10 + 1}</span>
-        <span>Pages: {Math.trunc(data.count / 10) + 1}</span>
+  if (data !== undefined) {
+    const columns = Object.keys(data.results[0]).map((column) =>
+      capitalizeFirstLetter(column)
+    );
+    const rows = data.results.map((row: any) => [
+      capitalizeFirstLetter(row.name),
+      row.url
+    ]);
+
+    return (
+      <div className="home">
+        <Table>
+          <>
+            <thead>
+              <TableRow>
+                <>
+                  {columns?.map((name, columnIndex) => {
+                    return (
+                      <TableHeaderCell key={columnIndex}>
+                        {name}
+                      </TableHeaderCell>
+                    );
+                  })}
+                </>
+              </TableRow>
+            </thead>
+            <tbody>
+              {rows?.map((row: any, rowIndex: number) => {
+                return (
+                  <TableRow
+                    key={rowIndex}
+                    onClick={() => handleSelectRow(getPokemonIdFromURL(row[1]))}
+                  >
+                    <>
+                      {row.map((data: any, rowDataIndex: number) => {
+                        return <TableCell key={rowDataIndex}>{data}</TableCell>;
+                      })}
+                    </>
+                  </TableRow>
+                );
+              })}
+            </tbody>
+          </>
+        </Table>
+        <div>
+          <Button onClick={handlePrev} disabled={offset === 0}>
+            Previous
+          </Button>
+          <Button
+            onClick={handleNext}
+            disabled={offset === Math.trunc(data.count / 10) + 1}
+          >
+            Next
+          </Button>
+          <span>Page: {offset / 10 + 1}</span>
+          <span>Pages: {Math.trunc(data.count / 10) + 1}</span>
+        </div>
+        {selectedPokemonId != null ? (
+          <div>
+            <PokemonCard pokemonId={selectedPokemonId} />
+          </div>
+        ) : null}
       </div>
-      <div>
-        <PokemonCard pokemonId={selectedPokemonId} />
-      </div>
-    </div>
-  );
+    );
+  }
+
+  return <></>;
 };
 
 export default Home;
