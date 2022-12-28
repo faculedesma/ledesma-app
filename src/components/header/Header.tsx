@@ -1,14 +1,14 @@
-import React from "react";
-import PokemonLogo from "@assets/images/pokemon-logo.png";
-// import PokemonPikachu from "@assets/images/pikachu.png";
-import PokemonPikachu from "@assets/images/pokemon-svg.png";
-import "./header.scss";
+import React from 'react';
+import PokemonLogo from '@assets/images/pokemon-logo.png';
+import PokemonPikachu from '@assets/images/pokemon-svg.png';
+import './header.scss';
 
-const Header = () => {
+const Header = (): JSX.Element => {
   return (
     <div className="header">
-      <img src={PokemonLogo} />
-      <img src={PokemonPikachu} />
+      <img src={PokemonLogo} alt="poke-logo" />
+      <img src={PokemonPikachu} alt="poke-pika" />
+      <p>Test</p>
     </div>
   );
 };
