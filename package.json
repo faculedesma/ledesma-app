@@ -1,5 +1,6 @@
 {
-  "name": "reactjs-vite",
+  "name": "ledesma-app",
+  "homepage": "https://faculedesma.github.io/ledesma-app",
   "private": true,
   "version": "0.0.1",
   "type": "module",
