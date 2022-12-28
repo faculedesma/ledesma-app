@@ -8,7 +8,6 @@ const Header = (): JSX.Element => {
     <div className="header">
       <img src={PokemonLogo} alt="poke-logo" />
       <img src={PokemonPikachu} alt="poke-pika" />
-      <p>Test</p>
     </div>
   );
 };
