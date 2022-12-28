@@ -26,8 +26,8 @@ jobs:
           scope: '@faculedesma'
       - name: Install dependencies
         run: npm install
-        with:
-          access_token: ${{ github.token }}
+        env:
+          NODE_AUTH_TOKEN: ${{ github.token }}
       - name: Lint
         run: npm run lint
       - name: Build
