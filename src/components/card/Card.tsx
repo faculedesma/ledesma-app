@@ -1,78 +1,56 @@
-import React from 'react';
-import { useSinglePokemon } from '@components/hooks/useSinglePokemon';
+import { Indeterminate } from '@faculedesma/ledesma-lib';
+import React, { useState } from 'react';
+import { ISinglePokemonParsed } from 'src/types';
 import './card.scss';
 
-interface IPokemonCardProps {
-  pokemonId: string;
+interface ICardProps {
+  pokemon: ISinglePokemonParsed;
 }
 
-export const PokemonCard = ({ pokemonId }: IPokemonCardProps): JSX.Element => {
-  const { data, isLoading, isError } = useSinglePokemon(pokemonId);
+export const Card: React.FC<ICardProps> = ({ pokemon }): JSX.Element => {
+  const [isImageLoaded, setIsImageLoaded] = useState<boolean>(false);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  const handleImageLoaded = (): void => setIsImageLoaded(true);
 
-  if (isError) {
-    return <div>Error!</div>;
-  }
-
-  const pokemon = data;
-
-  return (
-    <div className={`card`}>
-      <div className={`card-header`}>
+  return pokemon !== undefined ? (
+    <div className="card">
+      <div className="card-header">
         <div className="image-container">
-          <img src={pokemon?.imageSrc} alt="header-card" />
+          <img
+            src={pokemon?.imageSrc}
+            alt="poke-default"
+            onLoad={handleImageLoaded}
+          />
+          {!isImageLoaded && <Indeterminate />}
         </div>
       </div>
-      <div className={`card-content`}>
-        <div>
+      <div className="card-content">
+        <div className="top">
           <b>{pokemon?.name}</b>
-          <span style={{ marginLeft: 10, opacity: 0.5 }}>
-            {pokemon?.stats.hp}Hp
-          </span>
+          <span className="hp">{pokemon?.stats.hp}Hp</span>
         </div>
-        <div>
-          <span style={{ transform: 'translateY(40%)', opacity: 0.5 }}>
-            {pokemon?.stats.experience}Exp
-          </span>
+        <div className="bottom">
+          <span className="exp">{pokemon?.stats.experience}Exp</span>
         </div>
       </div>
-      <div className={`card-footer`}>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center'
-          }}
-        >
-          <b style={{ fontSize: 16 }}>{pokemon?.stats.attack}K</b>
-          <p style={{ fontSize: 12, opacity: 0.5 }}>Attack</p>
+      <div className="card-footer">
+        <div className="stat">
+          <b>{pokemon?.stats.attack}K</b>
+          <p>Attack</p>
         </div>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center'
-          }}
-        >
-          <b style={{ fontSize: 16 }}>{pokemon?.stats.specialAttack}K</b>
-          <p style={{ fontSize: 12, opacity: 0.5 }}>Special</p>
+        <div className="stat">
+          <b>{pokemon?.stats.specialAttack}K</b>
+          <p>Special</p>
         </div>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center'
-          }}
-        >
-          <b style={{ fontSize: 16 }}>{pokemon?.stats.defense}K</b>
-          <p style={{ fontSize: 12, opacity: 0.5 }}>Defense</p>
+        <div className="stat">
+          <b>{pokemon?.stats.defense}K</b>
+          <p>Defense</p>
         </div>
       </div>
     </div>
+  ) : (
+    <>No pokemon selected</>
   );
 };
 
-export default PokemonCard;
+export default Card;

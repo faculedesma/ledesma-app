@@ -1,7 +1,57 @@
 .home {
-  width: 100%;
+  min-width: 100%;
+  min-height: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  margin-top: 40px;
+
+  &-table {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    
+    .table {
+      background-color: #fffcf3;
+
+      thead {
+        th {
+          &:first-child {
+            width: 60px;
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          cursor: pointer;
+  
+          &:hover {
+            background-color: #fbd68b;
+          }
+  
+          &:active {
+            background-color: #ffcd69;
+          }
+        }
+      }
+    }
+
+    .table-skeleton {
+      height: 528px;
+      background-color: #fffcf3;
+    }
+
+    .pagination {
+      margin-top: 20px;
+    }
+  }
+
+  &-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

@@ -1,9 +1,9 @@
-import React from "react";
-import Home from "@components/home/Home";
-import Header from "@components/header/Header";
-import "./app.scss";
+import React from 'react';
+import Home from '@components/home/Home';
+import Header from '@components/header/Header';
+import './app.scss';
 
-const App: React.FC = () => {
+const App: React.FC = (): JSX.Element => {
   return (
     <div className="app">
       <Header />

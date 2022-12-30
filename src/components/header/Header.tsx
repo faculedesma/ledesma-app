@@ -3,7 +3,7 @@ import PokemonLogo from '@assets/images/pokemon-logo.png';
 import PokemonPikachu from '@assets/images/pokemon-svg.png';
 import './header.scss';
 
-const Header = (): JSX.Element => {
+const Header: React.FC = (): JSX.Element => {
   return (
     <div className="header">
       <img src={PokemonLogo} alt="poke-logo" />

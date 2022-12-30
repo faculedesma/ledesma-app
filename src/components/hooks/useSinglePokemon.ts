@@ -36,7 +36,10 @@ export const useSinglePokemon = (
 ): IUseSinglePokemonResponse => {
   const { data, isError, isLoading } = useQuery(
     ['pokemon', pokemonId],
-    getPokemon
+    getPokemon,
+    {
+      enabled: pokemonId !== ''
+    }
   );
   return { data, isError, isLoading };
 };

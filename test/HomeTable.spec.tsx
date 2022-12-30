@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from '../src/components/home/Home';
+import HomeTable from '../src/components/home/HomeTable';
 import { usePokemons } from '../src/components/hooks/usePokemons';
 import * as hooks from '../src/components/hooks/usePokemons';
 import { render } from '@testing-library/react';
@@ -23,26 +23,30 @@ const mockedData = {
   ]
 };
 
-describe('<Home />', () => {
+const homeTableProps = {
+  setPokemonId: jest.fn()
+};
+
+describe('<HomeTable />', () => {
   it('fetches all pokemons', async () => {
     jest.spyOn(hooks, 'usePokemons').mockImplementation(() => ({
       data: mockedData,
       isError: false,
       isLoading: false
     }));
-    await render(<Home />);
+    await render(<HomeTable {...homeTableProps} />);
     expect(usePokemons).toHaveBeenCalledTimes(1);
     expect(usePokemons).toHaveBeenCalledWith(0);
   });
 
-  it('shows loading spinner', async () => {
+  it('shows table skeleton on loading', async () => {
     jest.spyOn(hooks, 'usePokemons').mockImplementation((offset) => ({
       data: undefined,
       isError: false,
       isLoading: true
     }));
-    const { getByText } = await render(<Home />);
-    expect(getByText('Loading...')).toBeInTheDocument();
+    const { container } = await render(<HomeTable {...homeTableProps} />);
+    expect(container.firstChild?.firstChild).toHaveClass('table-skeleton');
   });
 
   it('shows error', async () => {
@@ -51,7 +55,7 @@ describe('<Home />', () => {
       isError: true,
       isLoading: false
     }));
-    const { getByText } = await render(<Home />);
+    const { getByText } = await render(<HomeTable {...homeTableProps} />);
     expect(getByText('Error!')).toBeInTheDocument();
   });
 });
