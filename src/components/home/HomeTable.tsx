@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import {
   Table,
   TableRow,
@@ -37,7 +37,12 @@ const HomeTable: React.FC<IHomeTableProps> = ({
   }
 
   if (isError) {
-    return <div>Error!</div>;
+    console.error('Failed to load pokemons');
+    return (
+      <div className="home-table">
+        <TableLoading />
+      </div>
+    );
   }
 
   const handleSelectRow = (id: string): void => setPokemonId(id);
@@ -96,4 +101,4 @@ const HomeTable: React.FC<IHomeTableProps> = ({
   );
 };
 
-export default HomeTable;
+export default memo(HomeTable);

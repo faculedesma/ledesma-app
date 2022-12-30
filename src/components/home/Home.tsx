@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import HomeTable from './HomeTable';
 import HomeCard from './HomeCard';
 import './home.scss';
@@ -6,7 +6,12 @@ import './home.scss';
 const Home: React.FC = (): JSX.Element => {
   const [selectedPokemonId, setSelectedPokemonId] = useState<string>('');
 
-  const handleSelectPokemonId = (id: string): void => setSelectedPokemonId(id);
+  const handleSelectPokemonId = useMemo(
+    () =>
+      (id: string): void =>
+        setSelectedPokemonId(id),
+    []
+  );
 
   return (
     <div className="home">

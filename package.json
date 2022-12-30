@@ -2,7 +2,7 @@
   "name": "ledesma-app",
   "homepage": "https://faculedesma.github.io/ledesma-app",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite",

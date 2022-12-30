@@ -27,7 +27,7 @@ const homeCardProps = {
   pokemonId: '1'
 };
 
-describe('<HomeTable />', () => {
+describe('<HomeCard />', () => {
   it('fetches pokemon 1', async () => {
     jest.spyOn(hooks, 'useSinglePokemon').mockImplementation(() => ({
       data: mockedData,
@@ -55,7 +55,9 @@ describe('<HomeTable />', () => {
       isError: true,
       isLoading: false
     }));
-    const { getByText } = await render(<HomeCard {...homeCardProps} />);
-    expect(getByText('Error!')).toBeInTheDocument();
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const { container } = await render(<HomeCard {...homeCardProps} />);
+    expect(container.firstChild).toHaveClass('card-loading');
+    expect(errorSpy).toHaveBeenCalledTimes(1);
   });
 });

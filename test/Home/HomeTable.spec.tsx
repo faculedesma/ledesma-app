@@ -55,7 +55,9 @@ describe('<HomeTable />', () => {
       isError: true,
       isLoading: false
     }));
-    const { getByText } = await render(<HomeTable {...homeTableProps} />);
-    expect(getByText('Error!')).toBeInTheDocument();
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const { container } = await render(<HomeTable {...homeTableProps} />);
+    expect(container.firstChild?.firstChild).toHaveClass('table-skeleton');
+    expect(errorSpy).toHaveBeenCalledTimes(1);
   });
 });

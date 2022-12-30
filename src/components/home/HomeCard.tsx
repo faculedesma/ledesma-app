@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Card from '@components/card/Card';
 import { useSinglePokemon } from '@components/hooks/useSinglePokemon';
 
@@ -32,7 +32,8 @@ const HomeCard: React.FC<IPokemonCardProps> = ({ pokemonId }): JSX.Element => {
   }
 
   if (isError) {
-    return <div>Error!</div>;
+    console.error('Failed to load pokemon');
+    return <LoadingCard />;
   }
 
   return (
@@ -42,4 +43,4 @@ const HomeCard: React.FC<IPokemonCardProps> = ({ pokemonId }): JSX.Element => {
   );
 };
 
-export default HomeCard;
+export default memo(HomeCard);
