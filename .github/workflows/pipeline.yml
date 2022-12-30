@@ -29,7 +29,7 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           scope: '@faculedesma'
       - name: Install dependencies
-        run: npm install
+        run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       - name: Lint
@@ -48,7 +48,7 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           scope: '@faculedesma'
       - name: Install dependencies
-        run: npm install
+        run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       - name: Build
@@ -73,7 +73,7 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           scope: '@faculedesma'
       - name: Install dependencies
-        run: npm install
+        run: npm ci
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       - uses: actions/download-artifact@v2
@@ -85,6 +85,7 @@ jobs:
 
   deploy:
     needs: [test]
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
