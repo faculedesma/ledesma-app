@@ -1,8 +1,12 @@
 import { useQuery, QueryFunctionContext } from 'react-query';
 import { capitalizeFirstLetter } from '@utils/utils';
-import { ISinglePokemonParsed, IUseSinglePokemonResponse } from '../../types';
+import {
+  ISinglePokemonParsed,
+  IUseSinglePokemonResponse,
+  ISinglePokemonAPI
+} from '../../types';
 
-const parsePokemonData = (data: any): ISinglePokemonParsed => {
+const parsePokemonData = (data: ISinglePokemonAPI): ISinglePokemonParsed => {
   return {
     id: data.id,
     name: capitalizeFirstLetter(data.name),

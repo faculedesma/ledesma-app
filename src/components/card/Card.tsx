@@ -4,7 +4,7 @@ import { ISinglePokemonParsed } from 'src/types';
 import './card.scss';
 
 interface ICardProps {
-  pokemon: ISinglePokemonParsed;
+  pokemon: ISinglePokemonParsed | undefined;
 }
 
 export const Card: React.FC<ICardProps> = ({ pokemon }): JSX.Element => {

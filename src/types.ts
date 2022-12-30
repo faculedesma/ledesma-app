@@ -1,5 +1,5 @@
 export interface ISinglePokemonParsed {
-  id: string;
+  id: number;
   name: string;
   imageSrc: string;
   height: number;
@@ -27,6 +27,42 @@ export interface IPokemonsAPI {
   results: PokemonResult[];
 }
 
+export interface ISinglePokemonAPI {
+  abilities: [];
+  base_experience: number;
+  forms: [];
+  game_indices: [];
+  height: number;
+  held_items: [];
+  id: number;
+  is_default: boolean;
+  location_area_encounters: string;
+  moves: [];
+  name: string;
+  order: number;
+  past_types: [];
+  species: {
+    name: string;
+    url: string;
+  };
+  sprites: {
+    other: {
+      'official-artwork': {
+        front_default: string;
+      };
+    };
+  };
+  stats: Array<{
+    base_stat: number;
+    effort: number;
+    stat: {
+      name: string;
+      url: string;
+    };
+  }>;
+  weight: number;
+}
+
 export interface IUsePokemonsResponse {
   data: IPokemonsAPI | undefined;
   isError: boolean;
@@ -34,7 +70,7 @@ export interface IUsePokemonsResponse {
 }
 
 export interface IUseSinglePokemonResponse {
-  data: any;
+  data: ISinglePokemonParsed | undefined;
   isError: boolean;
   isLoading: boolean;
 }

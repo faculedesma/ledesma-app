@@ -1,7 +1,7 @@
 import React from 'react';
-import HomeTable from '../src/components/home/HomeTable';
-import { usePokemons } from '../src/components/hooks/usePokemons';
-import * as hooks from '../src/components/hooks/usePokemons';
+import HomeTable from '../../src/components/home/HomeTable';
+import { usePokemons } from '../../src/components/hooks/usePokemons';
+import * as hooks from '../../src/components/hooks/usePokemons';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
