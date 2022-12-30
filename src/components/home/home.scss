@@ -1,3 +1,5 @@
+@import '../../utils/variables';
+
 .home {
   min-width: 100%;
   min-height: 100%;
@@ -14,7 +16,7 @@
     align-items: center;
     
     .table {
-      background-color: #fffcf3;
+      background-color: $primary-color;
 
       thead {
         th {
@@ -29,11 +31,11 @@
           cursor: pointer;
   
           &:hover {
-            background-color: #fbd68b;
+            background-color: $highlight-color;
           }
   
           &:active {
-            background-color: #ffcd69;
+            background-color: $highlight-color-dark;
           }
         }
       }
@@ -41,7 +43,7 @@
 
     .table-skeleton {
       height: 528px;
-      background-color: #fffcf3;
+      background-color: $primary-color;
     }
 
     .pagination {

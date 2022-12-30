@@ -1,12 +1,14 @@
+@import './utils/variables';
+
 body {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: $primary-font;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
   width: 100%;
   margin: 0;
   min-height: 100vh;
-  color: #242424;
+  color: $secondary-color;
 }
 
 h1 {
