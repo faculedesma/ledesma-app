@@ -1,16 +1,20 @@
 [![Deployment Pipeline](https://github.com/faculedesma/ledesma-app/actions/workflows/pipeline.yml/badge.svg)](https://github.com/faculedesma/ledesma-app/actions/workflows/pipeline.yml)
 
-# ReactJS & Typescript
+<p >
+  <a href="https://pokeapi.co/" rel="noopener" target="_blank"><img width="150" src="src/assets/images/pokemon-logo.png" alt="Pokemon logo"></a>
+</p>
+
+# Ledesma APP
 
 ## About The Project
 
-This is a starter boilerplate code to build reactjs applications with typescript. It was created using Vite next generation frontend tooling. Also includes the use of eslint & prettier for code formatting.
+An application that showcases a list of all Pokemons where you can interact with it to see all its statistics.
 
 ## Built With
 
 I'm using these main technologies to build this project:
 
-[![ReactJS][react]][node-url]
+[![ReactJS][react]][react-url]
 [![Typescript][typescript]][typescript-url]
 [![Sass][sass]][sass-url]
 [![Vite][vite]][vite-url]
@@ -27,7 +31,7 @@ If you want to play with it just follow these steps:
 
 1. Clone the repo
    ```sh
-   git clone git@github.com:faculedesma/reactjs-vite.git
+   git clone git@github.com:faculedesma/ledesma-app.git
    ```
 2. Install NPM packages
    ```sh
